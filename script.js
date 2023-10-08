@@ -32,6 +32,7 @@ function getText() {
 function onButtonClicked() {
   changeColor();
   updateNumber();
+  updateText();
 }
 
 function changeColor() {
@@ -48,5 +49,4 @@ function randomNumber() {
 function updateNumber() {
   clickCount++;
   localStorage.clicks = clickCount;
-  updateText();
 }
