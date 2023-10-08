@@ -40,15 +40,17 @@ function onButtonClicked() {
 }
 
 function changeColor() {
-  const color = Array.from({ length: 3 })
-    .map((_) => randomNumber())
-    .join(" ");
+  let hexcode = "#";
 
-  clickButtonRef.style.backgroundColor = `rgb(${color})`;
+  while (hexcode.length < 7) {
+    hexcode += randomHex();
+  }
+
+  clickButtonRef.style.backgroundColor = hexcode;
 }
 
-function randomNumber() {
-  return Math.floor(Math.random() * 256);
+function randomHex() {
+  return Math.floor(Math.random() * 0x10).toString(16);
 }
 
 function updateNumber() {
