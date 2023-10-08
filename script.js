@@ -1,28 +1,51 @@
 const buttonRef = document.querySelector("button");
-const textRef = document.querySelector("p");
 
-let clickCount = localStorage.getItem("clicks") | 0;
+let clickCount = +localStorage.getItem("clicks") || 0;
 
 window.onload = (event) => {
-  updateText();
+  createText();
 };
 
-function changeColor() {
-  const RGB = `rgb(${randomNumber()} ${randomNumber()} ${randomNumber()})`;
+function createText() {
+  const text = document.createElement("p");
 
-  clickCount++;
-
-  buttonRef.style.backgroundColor = RGB;
+  document.body.insertBefore(text, buttonRef);
 
   updateText();
+}
 
-  localStorage.clicks = clickCount;
+function updateText() {
+  const textRef = document.querySelector("p");
+
+  switch (clickCount) {
+    case 0:
+      textRef.innerText = "Click the button!";
+      break;
+    case 1:
+      textRef.innerText = "You've clicked 1 time!";
+      break;
+    default:
+      textRef.innerText = `You've clicked ${clickCount} times!`;
+  }
+}
+
+function onButtonClicked() {
+  changeColor();
+  updateNumber();
+}
+
+function changeColor() {
+  const color = `rgb(${randomNumber()} ${randomNumber()} ${randomNumber()})`;
+
+  buttonRef.style.backgroundColor = color;
 }
 
 function randomNumber() {
   return Math.floor(Math.random() * 256);
 }
 
-function updateText() {
-  textRef.innerText = `You've clicked ${clickCount} times`;
+function updateNumber() {
+  clickCount++;
+  localStorage.clicks = clickCount;
+  updateText();
 }

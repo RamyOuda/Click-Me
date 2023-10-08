@@ -1,21 +1,24 @@
 body {
-  height: 100vh;
-  background-color: #151515;
-  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+
+  height: 100vh;
+  background-color: #151515;
+  margin: 0;
 }
 
 p {
   color: white;
-  position: absolute;
-  top: 50px;
-  font-size: 2.5rem;
 }
 
 button {
-  padding: 2.5rem 5rem;
+  padding: 40px 80px;
   border-radius: 16px;
-  font-size: 2.5rem;
+}
+
+p,
+button {
+  font-size: 3rem;
 }
