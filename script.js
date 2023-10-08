@@ -4,6 +4,7 @@ let clickCount = +localStorage.getItem("clicks") || 0;
 
 window.onload = () => {
   createText();
+  changeColor();
 };
 
 function createText() {
