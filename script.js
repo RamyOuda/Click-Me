@@ -1,15 +1,18 @@
-const buttonRef = document.querySelector("button");
+const clickButtonRef = document.querySelector(".click-button");
+const resetButtonRef = document.querySelector(".reset-button");
 
 let clickCount = +localStorage.getItem("clicks") || 0;
 
 window.onload = () => {
   createText();
   changeColor();
+  updateResetButton();
 };
 
 function createText() {
   const textElement = document.createElement("p");
-  document.body.insertBefore(textElement, buttonRef);
+  document.body.insertBefore(textElement, clickButtonRef);
+
   updateText();
 }
 
@@ -33,13 +36,15 @@ function onButtonClicked() {
   changeColor();
   updateNumber();
   updateText();
+  updateResetButton();
 }
 
 function changeColor() {
   const color = Array.from({ length: 3 })
     .map((_) => randomNumber())
     .join(" ");
-  buttonRef.style.backgroundColor = `rgb(${color})`;
+
+  clickButtonRef.style.backgroundColor = `rgb(${color})`;
 }
 
 function randomNumber() {
@@ -49,4 +54,17 @@ function randomNumber() {
 function updateNumber() {
   clickCount++;
   localStorage.clicks = clickCount;
+}
+
+function updateResetButton() {
+  const display = clickCount ? "inline-block" : "none";
+  resetButtonRef.style.display = display;
+}
+
+function resetCounter() {
+  clickCount = 0;
+  localStorage.clicks = 0;
+
+  updateText();
+  updateResetButton();
 }

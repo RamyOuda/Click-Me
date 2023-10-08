@@ -13,12 +13,22 @@ p {
   color: white;
 }
 
-button {
+.click-button {
   padding: 40px 80px;
   border-radius: 16px;
 }
 
 p,
-button {
-  font-size: 3rem;
+.click-button {
+  font-size: 48px;
+}
+
+.reset-button {
+  position: fixed;
+  bottom: 48px;
+  left: 48px;
+  padding: 16px 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  display: none;
 }
