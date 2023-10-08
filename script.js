@@ -1,23 +1,21 @@
-const clickButtonRef = document.querySelector(".click-button");
-const resetButtonRef = document.querySelector(".reset-button");
+const clickButtonRef = document.querySelector(".update");
+const resetButtonRef = document.querySelector(".reset");
 
 let clickCount = +localStorage.getItem("clicks") || 0;
+let isLoaded = false;
 
-window.onload = () => {
-  changeColor();
-  createText();
-  updateText();
-  updateResetButton();
-};
+update();
 
-function onButtonClicked() {
+function update() {
+  isLoaded ? updateNumber() : createText();
+  isLoaded = true;
+
   changeColor();
-  updateNumber();
   updateText();
   updateResetButton();
 }
 
-function onResetClicked() {
+function reset() {
   clickCount = 0;
   localStorage.clicks = clickCount;
 
