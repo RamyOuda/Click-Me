@@ -4,39 +4,30 @@ const resetButtonRef = document.querySelector(".reset-button");
 let clickCount = +localStorage.getItem("clicks") || 0;
 
 window.onload = () => {
-  createText();
   changeColor();
+  createText();
+  updateText();
   updateResetButton();
 };
-
-function createText() {
-  const textElement = document.createElement("p");
-  document.body.insertBefore(textElement, clickButtonRef);
-
-  updateText();
-}
-
-function updateText() {
-  const textRef = document.querySelector("p");
-  textRef.innerText = getText();
-}
-
-function getText() {
-  switch (clickCount) {
-    case 0:
-      return "Click the button!";
-    case 1:
-      return "You've clicked 1 time!";
-    default:
-      return `You've clicked ${clickCount} times!`;
-  }
-}
 
 function onButtonClicked() {
   changeColor();
   updateNumber();
   updateText();
   updateResetButton();
+}
+
+function onResetClicked() {
+  clickCount = 0;
+  localStorage.clicks = clickCount;
+
+  updateText();
+  updateResetButton();
+}
+
+function updateResetButton() {
+  const display = clickCount ? "inline-block" : "none";
+  resetButtonRef.style.display = display;
 }
 
 function changeColor() {
@@ -58,15 +49,23 @@ function updateNumber() {
   localStorage.clicks = clickCount;
 }
 
-function updateResetButton() {
-  const display = clickCount ? "inline-block" : "none";
-  resetButtonRef.style.display = display;
+function createText() {
+  const textElement = document.createElement("p");
+  document.body.insertBefore(textElement, clickButtonRef);
 }
 
-function resetCounter() {
-  clickCount = 0;
-  localStorage.clicks = 0;
+function updateText() {
+  const textRef = document.querySelector("p");
+  textRef.innerText = getText();
+}
 
-  updateText();
-  updateResetButton();
+function getText() {
+  switch (clickCount) {
+    case 0:
+      return "Click the button!";
+    case 1:
+      return "You've clicked 1 time!";
+    default:
+      return `You've clicked ${clickCount} times!`;
+  }
 }
