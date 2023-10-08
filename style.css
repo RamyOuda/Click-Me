@@ -13,17 +13,17 @@ p {
   color: white;
 }
 
-.click-button {
+.update {
   padding: 40px 80px;
   border-radius: 16px;
 }
 
 p,
-.click-button {
+.update {
   font-size: 48px;
 }
 
-.reset-button {
+.reset {
   position: fixed;
   bottom: 48px;
   left: 48px;
