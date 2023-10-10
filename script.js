@@ -2,15 +2,36 @@ const clickButtonRef = document.querySelector(".update");
 const resetButtonRef = document.querySelector(".reset");
 
 let clickCount = +localStorage.getItem("clicks") || 0;
-let isLoaded = false;
 
-update();
+createText();
+
+function createText() {
+  const textElement = document.createElement("p");
+  document.body.insertBefore(textElement, clickButtonRef);
+
+  updateText();
+  updateResetButton();
+}
+
+function updateText() {
+  const textRef = document.querySelector("p");
+  textRef.innerText = getText();
+}
+
+function getText() {
+  switch (clickCount) {
+    case 0:
+      return "Click the button!";
+    case 1:
+      return "You've clicked 1 time!";
+    default:
+      return `You've clicked ${clickCount} times!`;
+  }
+}
 
 function update() {
-  isLoaded ? updateNumber() : createText();
-  isLoaded = true;
-
   changeColor();
+  updateNumber();
   updateText();
   updateResetButton();
 }
@@ -45,25 +66,4 @@ function randomHex() {
 function updateNumber() {
   clickCount++;
   localStorage.clicks = clickCount;
-}
-
-function createText() {
-  const textElement = document.createElement("p");
-  document.body.insertBefore(textElement, clickButtonRef);
-}
-
-function updateText() {
-  const textRef = document.querySelector("p");
-  textRef.innerText = getText();
-}
-
-function getText() {
-  switch (clickCount) {
-    case 0:
-      return "Click the button!";
-    case 1:
-      return "You've clicked 1 time!";
-    default:
-      return `You've clicked ${clickCount} times!`;
-  }
 }
