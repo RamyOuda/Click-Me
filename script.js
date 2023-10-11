@@ -1,13 +1,14 @@
 const clickButtonRef = document.querySelector(".update");
 const resetButtonRef = document.querySelector(".reset");
 
-let clickCount = +localStorage.getItem("clicks") || 0;
+let clickCount;
 
-createText();
+initialize();
 
-function createText() {
+function initialize() {
   const textElement = document.createElement("p");
   document.body.insertBefore(textElement, clickButtonRef);
+  clickCount = +localStorage.getItem("clicks");
 
   updateText();
   updateResetButton();
@@ -53,14 +54,10 @@ function changeColor() {
   let hexcode = "#";
 
   while (hexcode.length < 7) {
-    hexcode += randomHex();
+    hexcode += Math.floor(Math.random() * 0x10).toString(16);
   }
 
   clickButtonRef.style.backgroundColor = hexcode;
-}
-
-function randomHex() {
-  return Math.floor(Math.random() * 0x10).toString(16);
 }
 
 function updateNumber() {
